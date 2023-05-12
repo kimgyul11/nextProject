@@ -1,7 +1,12 @@
 import React from "react";
+import AppLayout from "../components/AppLayout";
 
 const Profile = () => {
-  return <div>나의 프로필</div>;
+  return (
+    <AppLayout>
+      <div>나의 프로필</div>
+    </AppLayout>
+  );
 };
 
 export default Profile;
