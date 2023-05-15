@@ -1,0 +1,12 @@
+.navbar {
+  margin: 0;
+  width: 100%;
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  height: 50px;
+  background-color: blanchedalmond;
+}
+.navbar a {
+  color: red;
+}
