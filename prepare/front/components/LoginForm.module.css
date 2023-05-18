@@ -56,7 +56,7 @@
   bottom: 0;
   width: 100%;
   height: 2px;
-  background-color: red;
+  background-color: #fff;
   transition: 0.5s;
   pointer-events: none;
   z-index: 9;

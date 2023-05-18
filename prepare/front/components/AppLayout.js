@@ -8,7 +8,7 @@ import LoginForm from "./LoginForm";
 const AppLayout = ({ children }) => {
   const [isLoggedIn, setIsLoggedIn] = useState(false);
   return (
-    <div>
+    <>
       <nav className={styles.navbar}>
         <Link href="/">
           <a>메인 로고</a>
@@ -21,12 +21,12 @@ const AppLayout = ({ children }) => {
         </Link>
       </nav>
       {isLoggedIn ? (
-        <UserProfile />
+        <UserProfile setIsLoggedIn={setIsLoggedIn} />
       ) : (
         <LoginForm setIsLoggedIn={setIsLoggedIn} />
       )}
       {children}
-    </div>
+    </>
   );
 };
 
