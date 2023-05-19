@@ -7,6 +7,7 @@ import LoginForm from "./LoginForm";
 
 const AppLayout = ({ children }) => {
   const [isLoggedIn, setIsLoggedIn] = useState(false);
+
   return (
     <>
       <nav className={styles.navbar}>
@@ -20,12 +21,16 @@ const AppLayout = ({ children }) => {
           <a>회원가입</a>
         </Link>
       </nav>
-      {isLoggedIn ? (
-        <UserProfile setIsLoggedIn={setIsLoggedIn} />
-      ) : (
-        <LoginForm setIsLoggedIn={setIsLoggedIn} />
-      )}
-      {children}
+      <div className={styles.container}>
+        <div className={styles.leftMenu}>
+          {isLoggedIn ? (
+            <UserProfile setIsLoggedIn={setIsLoggedIn} />
+          ) : (
+            <LoginForm setIsLoggedIn={setIsLoggedIn} />
+          )}
+        </div>
+        <div className={styles.rightMenu}>{children}</div>
+      </div>
     </>
   );
 };

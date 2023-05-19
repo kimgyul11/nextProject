@@ -1,3 +1,17 @@
+.container {
+  width: 100%;
+  height: 700px;
+  display: flex;
+}
+.leftMenu {
+  position: relative;
+  width: 40%;
+  height: 100%;
+}
+.rightMenu {
+  width: 60%;
+}
+
 .navbar {
   margin: 0;
   width: 100%;

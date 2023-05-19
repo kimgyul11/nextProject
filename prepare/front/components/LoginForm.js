@@ -1,17 +1,12 @@
 import Link from "next/link";
 import React, { useCallback, useState } from "react";
 import style from "./LoginForm.module.css";
+import useInput from "../hooks/useInput";
 
 const LoginForm = ({ setIsLoggedIn }) => {
-  const [id, setId] = useState("");
-  const [password, setPassword] = useState("");
+  const [id, onChangeId] = useInput("");
+  const [password, onChangePassword] = useInput("");
 
-  const onChangeId = useCallback((e) => {
-    setId(e.target.value);
-  }, []);
-  const onChangePassword = useCallback((e) => {
-    setPassword(e.target.value);
-  }, []);
   const submitHandler = useCallback(
     (e) => {
       e.preventDefault();

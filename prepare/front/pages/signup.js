@@ -1,10 +1,12 @@
-import React from "react";
+import React, { useCallback } from "react";
 import AppLayout from "../components/AppLayout";
+import SingupForm from "../components/SignupForm";
 
 const Signup = () => {
+  const onSubmit = useCallback(() => {}, []);
   return (
     <AppLayout>
-      <div>회원가입 페이지</div>
+      <SingupForm />
     </AppLayout>
   );
 };
