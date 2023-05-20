@@ -4,10 +4,10 @@ import Link from "next/link";
 import styles from "./AppLayout.module.css";
 import UserProfile from "./UserProfile";
 import LoginForm from "./LoginForm";
+import { useSelector } from "react-redux";
 
 const AppLayout = ({ children }) => {
-  const [isLoggedIn, setIsLoggedIn] = useState(false);
-
+  const { isLoggedIn } = useSelector((state) => state.user);
   return (
     <>
       <nav className={styles.navbar}>
@@ -23,11 +23,7 @@ const AppLayout = ({ children }) => {
       </nav>
       <div className={styles.container}>
         <div className={styles.leftMenu}>
-          {isLoggedIn ? (
-            <UserProfile setIsLoggedIn={setIsLoggedIn} />
-          ) : (
-            <LoginForm setIsLoggedIn={setIsLoggedIn} />
-          )}
+          {isLoggedIn ? <UserProfile /> : <LoginForm />}
         </div>
         <div className={styles.rightMenu}>{children}</div>
       </div>
