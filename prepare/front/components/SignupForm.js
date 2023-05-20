@@ -1,78 +1,143 @@
-import { useCallback, useState } from "react";
-import useInput from "../hooks/useInput";
 import styles from "./SignupForm.module.css";
+import useForm from "../hooks/useForm";
 
 const SingupForm = () => {
-  const [id, onchangeId] = useInput("");
-  const [nickname, onchangeNickname] = useInput("");
-  const [password, onchangePassword] = useInput("");
+  //ID
+  const {
+    input: id,
+    inputValid: enteredIdIsValid,
+    error: idInputHasError,
+    onChangeHandler: idChangeHandler,
+    onBlurHandler: idBlurHandler,
+    reset: idInputReset,
+  } = useForm((value) => value.trim() !== "");
+  //nickname
+  const {
+    input: nickname,
+    inputValid: enteredNicknameIsValid,
+    error: nicknameInputHasError,
+    onChangeHandler: nicknameChangeHandler,
+    onBlurHandler: nicknameBlurHandler,
+    reset: nicknameInputReset,
+  } = useForm((value) => value.trim() !== "");
+  //PASSWORD
+  const {
+    input: password,
+    inputValid: enteredPasswordIsValid,
+    error: passwordHasError,
+    onChangeHandler: passwordChangeHandler,
+    onBlurHandler: passwordBlurHandler,
+    reset: passwordInputReset,
+  } = useForm((value) => value.trim() !== "");
+  //PASSWORD CHECK
+  const {
+    input: passwordCheck,
+    inputValid: enteredPasswordChkIsValid,
+    error: passwordChkHasError,
+    onChangeHandler: passwordChkChangeHandler,
+    onBlurHandler: passwordChkBlurHandler,
+    reset: passwordChkInputReset,
+  } = useForm((value) => value === password);
 
-  //비밀번호 체크
-  const [passwordCheck, setChagePasswordCheck] = useState("");
-  const [passwordError, setPasswordError] = useState(false);
-  const onChangePasswordCheck = useCallback(
-    (e) => {
-      setChagePasswordCheck(e.target.value);
-      setPasswordError(e.target.value !== password);
-    },
-    [password]
-  );
-  //약관동의
-  const [term, setTerm] = useState(false);
-  const [termError, setTermError] = useState(false);
-  const onChangeTerm = useCallback((e) => {
-    setTerm(e.target.checked);
-    setTermError(false);
-  }, []);
-  const onSubmit = () => {};
+  //input form체크
+  let formValidCheck = false;
+  if (
+    enteredPasswordIsValid &&
+    enteredPasswordChkIsValid &&
+    enteredNicknameIsValid &&
+    enteredIdIsValid
+  ) {
+    formValidCheck = true;
+  }
+  //submit이벤트
+  const onsumitHandler = (e) => {
+    e.preventDefault();
+    if (!formValidCheck) {
+      console.log("불량확인");
+      return;
+    }
+    console.log(id, nickname, password);
+    idInputReset();
+    nicknameInputReset();
+    passwordInputReset();
+    passwordChkInputReset();
+  };
+
+  //유효성검사 styles
+  const idInputStyles = idInputHasError
+    ? `${styles.form_control} ${styles.invalid}`
+    : styles.form_control;
+  const passwordInputStyles = passwordHasError
+    ? `${styles.form_control} ${styles.invalid}`
+    : styles.form_control;
+  const passwordChkInputStyles = passwordChkHasError
+    ? `${styles.form_control} ${styles.invalid}`
+    : styles.form_control;
+  const nicknameInputStyles = nicknameInputHasError
+    ? `${styles.form_control} ${styles.invalid}`
+    : styles.form_control;
+
   return (
-    <form onSubmit={onSubmit}>
-      <div className={styles.form_control}>
+    <div className={styles.container}>
+      <form onSubmit={onsumitHandler}>
         <p>회원가입 페이지</p>
-        <div>
-          <label htmlFor="user-id">아이디</label>
-          <input type="text" id="user-id" value={id} onChange={onchangeId} />
+        <div className={idInputStyles}>
+          <label htmlFor="id">아이디(필수)</label>
+          <input
+            type="text"
+            id="id"
+            value={id}
+            onChange={idChangeHandler}
+            onBlur={idBlurHandler}
+          />
+          {idInputHasError && (
+            <p className={styles.error_text}>아이디를 확인해주세요</p>
+          )}
         </div>
-        <div>
+        <div className={nicknameInputStyles}>
           <label htmlFor="nickname">닉네임</label>
           <input
             type="text"
             id="nickname"
             value={nickname}
-            onChange={onchangeNickname}
+            onChange={nicknameChangeHandler}
+            onBlur={nicknameBlurHandler}
           />
+          {nicknameInputHasError && (
+            <p className={styles.error_text}>닉네임을 확인해주세요</p>
+          )}
         </div>
-        <div>
-          <label htmlFor="user-password">비밀번호</label>
+        <div className={passwordInputStyles}>
+          <label htmlFor="password">비밀번호</label>
           <input
             type="password"
-            id="user-password"
+            id="password"
             value={password}
-            onChange={onchangePassword}
+            onChange={passwordChangeHandler}
+            onBlur={passwordBlurHandler}
           />
+          {passwordHasError && (
+            <p className={styles.error_text}>비밀번호 확인해주세요</p>
+          )}
         </div>
-        <div>
-          <label htmlFor="user-chk">비밀번호 확인</label>
+        <div className={passwordChkInputStyles}>
+          <label htmlFor="passwordCheck">비밀번호 확인</label>
           <input
             type="password"
-            id="user-chk"
+            id="passwordCheck"
             value={passwordCheck}
-            onChange={onChangePasswordCheck}
+            onChange={passwordChkChangeHandler}
+            onBlur={passwordChkBlurHandler}
           />
-          {passwordError && (
+          {passwordChkHasError && (
             <p className={styles.error_text}>비밀번호가 일치하지 않습니다.</p>
           )}
         </div>
-      </div>
-      <div className={styles.chk}>
-        <span>동의하십니까?</span>
-        <input type="checkbox" checked={term} onChange={onChangeTerm} />
-        {termError && <p className={styles.error_text}>약관에 동의해주세요</p>}
-      </div>
-      <div>
-        <button>제출</button>
-      </div>
-    </form>
+        <div>
+          <button>제출</button>
+        </div>
+      </form>
+    </div>
   );
 };
 

@@ -20,7 +20,6 @@ export default (callbackFn) => {
 
   return {
     input,
-    touched,
     inputValid,
     error,
     onChangeHandler,
