@@ -3,7 +3,7 @@ export const initialState = {
     {
       id: 1,
       User: {
-        id: 1,
+        id: "coloo88@naver.com",
         nickname: "김기율",
       },
       content: "첫 번째 게시글",
@@ -40,7 +40,7 @@ export const addPost = {
 };
 
 const dummyPost = {
-  id: 2,
+  id: 123,
   content: "쓰레기데이터",
   User: {
     id: 1,
