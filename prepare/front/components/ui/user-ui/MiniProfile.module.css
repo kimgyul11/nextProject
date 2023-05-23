@@ -1,0 +1,21 @@
+.avatar_wrap {
+  display: flex;
+  align-items: center;
+}
+.avatar_wrap div {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  color: black;
+  font-size: 1.5rem;
+  width: 45px;
+  height: 45px;
+  border-radius: 50%;
+  background: white;
+}
+.avatar_wrap p {
+  color: white;
+  font-size: 1rem;
+  font-weight: bold;
+  margin-left: 5px;
+}

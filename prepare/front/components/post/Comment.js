@@ -1,5 +1,14 @@
 import React from "react";
 
-export default function Comments() {
-  return <div>코멘트 나옵니다.</div>;
+export default function Comments({ post }) {
+  console.log(post);
+  return (
+    <div>
+      {post.Comments.map((comment) => (
+        <div>
+          <p>{comment.content}</p>
+        </div>
+      ))}
+    </div>
+  );
 }
