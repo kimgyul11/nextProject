@@ -4,7 +4,19 @@ export const initialState = {
   signUpData: {},
   loginData: {},
 };
-export const loginAction = (data) => {
+export const loginRequestAction = (data) => {
+  return {
+    type: "LOG_IN_REQUEST",
+    data,
+  };
+};
+export const loginSuccessAction = (data) => {
+  return {
+    type: "LOG_IN",
+    data,
+  };
+};
+export const loginRequestFailure = (data) => {
   return {
     type: "LOG_IN",
     data,
