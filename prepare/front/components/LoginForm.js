@@ -2,19 +2,19 @@ import Link from "next/link";
 import React, { useCallback, useState } from "react";
 import style from "./LoginForm.module.css";
 import useInput from "../hooks/useInput";
-import { useDispatch } from "react-redux";
-import { loginAction } from "../reducers/user";
+import { useDispatch, useSelector } from "react-redux";
+import { loginRequestAction } from "../reducers/user";
 
 const LoginForm = () => {
   const dispatch = useDispatch();
-
+  const { isLogginIn } = useSelector((state) => state.user);
   const [id, onChangeId] = useInput("");
   const [password, onChangePassword] = useInput("");
 
   const submitHandler = useCallback(
     (e) => {
       e.preventDefault();
-      dispatch(loginAction({ id, password }));
+      dispatch(loginRequestAction({ id, password }));
       console.log(id, password);
     },
     [id, password]
@@ -53,7 +53,7 @@ const LoginForm = () => {
             <a>회원가입</a>
           </Link>
         </div>
-        <button>로그인</button>
+        <button disabled={isLogginIn && true}>로그인</button>
       </div>
     </form>
   );

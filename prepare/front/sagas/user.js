@@ -4,11 +4,12 @@ function logInAPI(data) {
 }
 function* logIn(action) {
   try {
+    console.log("saga Login");
     // const result = yield call(logInAPI, action.data);
     yield delay(1000);
     yield put({
       type: "LOG_IN_SUCCESS",
-      data: result.data,
+      data: action.data,
     });
   } catch (err) {
     yield put({
@@ -21,13 +22,13 @@ function* logIn(action) {
 function logOutAPI() {
   return axios.post("/api/logout");
 }
-function* logOut() {
+function* logOut(action) {
   try {
     // const result = yield call(logOutAPI);
     yield delay(1000);
     yield put({
       type: "LOG_OUT_SUCCESS",
-      data: result.data,
+      data: action.data,
     });
   } catch (err) {
     yield put({
